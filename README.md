@@ -12,6 +12,12 @@ MFTN Cloud Filtering permite procesar imágenes Landsat 5, 7, 8 y 9 usando coord
 
 El script incluye filtros para nubes, sombras de nubes, cirrus, nieve/hielo, píxeles sin datos, saturación radiométrica y una máscara temporal simple basada en cambios en la banda azul. También permite aplicar expansión de máscara, corrección BRDF opcional y generar compuestos estadísticos.
 
+## Comparación visual
+
+La siguiente imagen muestra una comparación entre un compuesto generado solo con filtros QA y un compuesto generado aplicando filtros QA junto con la Máscara de Filtrado Temporal de Nubes (MFTN).
+
+![Comparación entre Filtro QA y Filtro QA + MFTN](images/mftn.png)
+
 ## Funcionalidades principales
 
 - Procesamiento de imágenes Landsat Collection 2 Level 2.
