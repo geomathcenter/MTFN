@@ -29,11 +29,6 @@ El script incluye filtros para nubes, sombras de nubes, cirrus, nieve/hielo, pí
 5. Presionar `Process & Visualize`.
 6. Exportar el resultado a Google Drive o Earth Engine Asset.
 
-## Autores
-
-Institución: GeoMath Center  
-Contacto: geomathcenter@gmail.com  
-
 ## Cómo citar
 
 Si usas este código, aplicación o materiales derivados, por favor cita este repositorio:
