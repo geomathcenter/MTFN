@@ -33,7 +33,6 @@ El script incluye filtros para nubes, sombras de nubes, cirrus, nieve/hielo, pí
 
 Institución: GeoMath Center  
 Contacto: geomathcenter@gmail.com  
-Facebook: https://www.facebook.com/GeoMathCenter
 
 ## Cómo citar
 
