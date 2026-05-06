@@ -735,7 +735,7 @@ var headerPanel = ui.Panel({
       }
     }),
     ui.Label({
-      value: 'v2.3 — Global Release',
+      value: 'v1.0 — Global Release',
       style: {
         fontSize: '9px',
         color: PALETTE.muted,
