@@ -1,6 +1,10 @@
 # MFTN Cloud Filtering
 
-Aplicación desarrollada en Google Earth Engine para generar compuestos Landsat mediante filtros de calidad, enmascaramiento de nubes y una Máscara de Filtrado Temporal de Nubes (MFTN).
+Aplicación desarrollada en *Google Earth Engine* para generar compuestos Landsat mediante filtros de calidad, enmascaramiento de nubes y la aplicación de una *Máscara de Filtrado Temporal de Nubes — MFTN*.
+
+La *MFTN* es una adaptación práctica inspirada en el método original *Multi-Temporal Cloud Detection — MTCD, propuesto por **Hagolle et al. (2010)* en el artículo A multi-temporal method for cloud detection, applied to FORMOSAT-2, VENµS, LANDSAT and SENTINEL-2 images.
+
+Esta herramienta permite reducir nubes residuales, bruma y bordes nubosos en imágenes Landsat, mejorando la generación de compuestos multitemporales para análisis de cobertura terrestre, monitoreo ambiental y aplicaciones geoespaciales.
 
 ## Descripción
 
