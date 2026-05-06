@@ -31,11 +31,7 @@ El script incluye filtros para nubes, sombras de nubes, cirrus, nieve/hielo, pí
 
 ## Autores
 
-- Mg. Rolando Renee Badaracco Meza
-- Mg. Jhon Brayan Guerrero Salinas
-- Mg. Michel Aristóteles Choccña Rejas
-
-Institución: GEOMATH CENTER  
+Institución: GeoMath Center  
 Contacto: geomathcenter@gmail.com  
 Facebook: https://www.facebook.com/GeoMathCenter
 
