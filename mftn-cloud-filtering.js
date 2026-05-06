@@ -249,15 +249,26 @@ function buildLandsatCollection(params) {
 }
 
 // =====================================================================
-// MFTN — MÁSCARA DE FILTRADO TEMPORAL DE NUBES POR GRUPO ESPECTRAL
+// MFTN — MÁSCARA DE FILTRADO TEMPORAL DE NUBES GENERAL
+// Mezcla Landsat 5, 7, 8 y 9 en una sola referencia temporal
 // =====================================================================
-function applyMTCDSimpleToGroup(subCollection, params, groupName) {
-  subCollection = ee.ImageCollection(subCollection);
+function applyMTCDSimple(collection, params) {
+  collection = ee.ImageCollection(collection);
 
-  var reference = subCollection.select(OPTICAL_BANDS).median();
+  if (!params.applyMTCD) {
+    return collection;
+  }
+
+  // Referencia temporal general usando todos los sensores juntos.
+  // Las bandas ya están armonizadas como:
+  // blue, green, red, nir, swir1, swir2
+  var reference = collection
+    .select(OPTICAL_BANDS)
+    .median();
+
   var threshold = ee.Number(params.mtcdThreshold);
 
-  return subCollection.map(function(img) {
+  return collection.map(function(img) {
     var blueIncrease = img.select('blue')
       .subtract(reference.select('blue'));
 
@@ -265,31 +276,20 @@ function applyMTCDSimpleToGroup(subCollection, params, groupName) {
       .subtract(reference.select('red'));
 
     var blueTest = blueIncrease.gt(threshold);
-    var redChangeDominates = redIncrease.gt(blueIncrease.multiply(1.5));
-    var possibleCloud = blueTest.and(redChangeDominates.not());
+
+    var redChangeDominates = redIncrease
+      .gt(blueIncrease.multiply(1.5));
+
+    var possibleCloud = blueTest
+      .and(redChangeDominates.not());
 
     return img
       .updateMask(possibleCloud.not())
       .set('MTCD_simple_applied', 1)
       .set('MTCD_blue_threshold', params.mtcdThreshold)
-      .set('MTCD_reference_group', groupName)
-      .set('MTCD_reference_type', 'median_by_sensor_group');
+      .set('MTCD_reference_group', 'ALL_LANDSAT')
+      .set('MTCD_reference_type', 'median_all_sensors');
   });
-}
-
-function applyMTCDSimple(collection, params) {
-  if (!params.applyMTCD) {
-    return collection;
-  }
-
-  var collectionL457 = collection.filter(ee.Filter.eq('sensor_group', 'L5_L7'));
-  var collectionL89 = collection.filter(ee.Filter.eq('sensor_group', 'L8_L9'));
-
-  var filteredL457 = applyMTCDSimpleToGroup(collectionL457, params, 'L5_L7');
-  var filteredL89 = applyMTCDSimpleToGroup(collectionL89, params, 'L8_L9');
-
-  return ee.ImageCollection(filteredL457.merge(filteredL89))
-    .sort('system:time_start');
 }
 
 function applyMaskExpansionToCollection(collection, params) {
@@ -1114,8 +1114,8 @@ var exportNameBox = ui.Textbox({
 });
 
 var assetIdBox = ui.Textbox({
-  placeholder: 'projects/your-project/assets/composite',
-  value: 'projects/your-project/assets/composite',
+  placeholder: 'projects/ee-geomathcenter/assets/composite',
+  value: 'projects/ee-geomathcenter/assets/composite',
   style: {
     width: '260px',
     margin: '0',
